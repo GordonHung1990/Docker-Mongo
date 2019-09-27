@@ -1,0 +1,38 @@
+---
+version: '3.7'
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongo-server
+    volumes:
+    - mongo-configdb:/data/configdb
+    - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: qazwsx123
+    ports:
+    - 27017:27017
+    networks:
+    - mongo
+  mongo-express:
+    image: mongo-express
+    restart: always
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo-server        #MongoDB container name. Use comma delimited list of host names for replica sets.
+      ME_CONFIG_MONGODB_PORT: 27017                 #MongoDB port
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root         #MongoDB admin username
+      ME_CONFIG_MONGODB_ADMINPASSWORD: qazwsx123    #MongoDB admin password
+      ME_CONFIG_BASICAUTH_USERNAME: sysadmin        #mongo-express web username
+      ME_CONFIG_BASICAUTH_PASSWORD: 1qaz2wsx123     #mongo-express web password
+    ports:
+    - 8081:8081
+    networks:
+    - mongo
+volumes:
+  mongo-configdb: 
+  mongo-data: 
+networks:
+  mongo:
+    driver: bridge
