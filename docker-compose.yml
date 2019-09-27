@@ -2,7 +2,11 @@
 version: '3.7'
 services:
   mongo:
-    image: mongo
+    build:
+      context: mongo/
+      args:
+        MONGO_VERSION: latest
+      dockerfile: Dockerfile
     restart: always
     container_name: mongo-server
     volumes:
