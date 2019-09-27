@@ -8,10 +8,7 @@ Docker Mongo
 `docker-compose up -d`
 
 ### setp3:
-`http://localhost/`
-
-### setp4:
 `docker ps -a`
 
-### setp5 開啟網頁連接mongo
+### setp4 開啟網頁連接mongo
 `http://localhost:8081/`
